@@ -20,5 +20,9 @@ public class DBUtil {
     public static EntityManagerFactory getEmFactory() {
         return emf;
     }
+    
+    public static void close() {
+        emf.close();  // shut down factory
+    }
 
 }
