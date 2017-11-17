@@ -81,6 +81,14 @@ public class AccountServlet extends HttpServlet {
         }
         request.setAttribute("users", users);
         
+        List<Note> notes = null;
+        try {
+            notes = us.get(username).getNoteList();
+        } catch (Exception ex) {
+            Logger.getLogger(AccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.setAttribute("notes", notes);
+        
         Role admin = new Role(1);
         Role reg = new Role(0);
         

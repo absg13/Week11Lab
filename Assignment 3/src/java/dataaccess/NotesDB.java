@@ -1,6 +1,7 @@
 package dataaccess;
 
 import domainmodel.Note;
+import domainmodel.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,10 +19,13 @@ public class NotesDB {
     public int insert(Note note) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
+        User owner = note.getOwner();
+        owner.getNoteList().add(note);
         
         try {
             trans.begin();
             em.persist(note);
+            em.merge(owner);
             trans.commit();
             return 1;
         } catch (Exception ex) {
@@ -82,10 +86,13 @@ public class NotesDB {
     public int delete(Note note) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
+        User owner = note.getOwner();
+        owner.getNoteList().remove(note);
         
         try {
             trans.begin();
             em.remove(em.merge(note));
+            em.merge(owner);
             trans.commit();
             return 1;
         } catch (Exception ex) {

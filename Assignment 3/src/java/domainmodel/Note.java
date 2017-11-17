@@ -64,11 +64,12 @@ public class Note implements Serializable {
         this.noteID = noteID;
     }
 
-    public Note(Integer noteID, Date dateCreated, String title, String contents) {
+    public Note(Integer noteID, Date dateCreated, String title, String contents, User owner) {
         this.noteID = noteID;
         this.dateCreated = dateCreated;
         this.title = title;
         this.contents = contents;
+        this.owner = owner;
     }
 
     public Integer getNoteID() {
