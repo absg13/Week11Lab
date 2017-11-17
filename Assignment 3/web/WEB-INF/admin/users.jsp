@@ -41,14 +41,14 @@
                         </ul>
                     </td>
                     <td>
-                        <form action="users" method="post" >
+                        <form action="admin" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="selectedUsername" value="${user.username}">
                         </form>
                     </td>
                     <td>
-                        <form action="users" method="get">
+                        <form action="admin" method="get">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
                             <input type="hidden" name="selectedUsername" value="${user.username}">
@@ -59,7 +59,7 @@
         </table>
         <c:if test="${selectedUser == null}">
             <h3>Add User</h3>
-            <form action="users" method="POST">
+            <form action="admin" method="POST">
                 username: <input type="text" name="username"><br>
                 first name: <input type="text" name="firstname"><br>
                 last name: <input type="text" name="lastname"><br>
@@ -72,7 +72,7 @@
         </c:if>
         <c:if test="${selectedUser != null}">
             <h3>Edit User</h3>
-            <form action="users" method="POST">
+            <form action="admin" method="POST">
                 username: <input type="text" name="username" value="${selectedUser.username}" readonly><br>
                 first name: <input type="text" name="firstname" value="${selectedUser.firstname}"><br>
                 last name: <input type="text" name="lastname" value="${selectedUser.lastname}"><br>

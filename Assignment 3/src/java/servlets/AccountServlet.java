@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -50,6 +51,7 @@ public class AccountServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
@@ -95,6 +97,7 @@ public class AccountServlet extends HttpServlet {
             }
         }
         
+        session.setAttribute("username", username);
         request.setAttribute("message", "Invalid username or password!");
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").
                     forward(request, response);
